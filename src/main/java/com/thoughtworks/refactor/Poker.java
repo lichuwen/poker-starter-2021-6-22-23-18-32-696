@@ -8,8 +8,8 @@ public class Poker {
 
     public String compareResult(String blackHands, String whiteHands) {
         String winResult = "";
-        String blackHandsCategory = PokerUtil.judgeHandCategory(blackHands);
-        String whiteHandsCategory = PokerUtil.judgeHandCategory(whiteHands);
+        String blackHandsCategory = PokerUtil.judgeHandCategory(new Hand(blackHands));
+        String whiteHandsCategory = PokerUtil.judgeHandCategory(new Hand(whiteHands));
         int[] blackDescendingHandsNumbers = PokerUtil.getDescendingHandsNumbers(blackHands);
         int[] whiteDescendingHandsNumbers = PokerUtil.getDescendingHandsNumbers(whiteHands);
         int blackHandsCategoryRanking = judgeHandsCategoryRanking(blackHandsCategory);

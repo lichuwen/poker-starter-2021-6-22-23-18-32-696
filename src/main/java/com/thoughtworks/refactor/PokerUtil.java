@@ -42,23 +42,23 @@ public class PokerUtil {
     }
 
     //判断是什么牌
-    static String judgeHandCategory(String hands) {
+    static String judgeHandCategory(Hand hand) {
         String type = "";
-        if (isStraightFlush(hands)) {
+        if (isStraightFlush(hand.getHands())) {
             type = "StraightFlush";
-        } else if (isStraight(hands)) {
+        } else if (isStraight(hand.getHands())) {
             type = "Straight";
-        } else if (isFlush(hands)) {
+        } else if (isFlush(hand.getHands())) {
             type = "Flush";
-        } else if (isHighCard(hands)) {
+        } else if (isHighCard(hand.getHands())) {
             type = "HighCard";
-        } else if (isOnePair(hands)) {
+        } else if (isOnePair(hand.getHands())) {
             type = "OnePair";
-        } else if (isTwoPair(hands)) {
+        } else if (isTwoPair(hand.getHands())) {
             type = "TwoPair";
-        } else if (isThreeOfAKind(hands)) {
+        } else if (isThreeOfAKind(hand.getHands())) {
             type = "ThreeOfAKind";
-        } else if (isFourOfAKind(hands)) {
+        } else if (isFourOfAKind(hand.getHands())) {
             type = "FourOfAKind";
         } else { //四个数字相同——铁支
             type = "FullHouse";
