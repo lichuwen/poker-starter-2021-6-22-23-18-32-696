@@ -262,9 +262,9 @@ public class Poker {
         String[] strArray = card.split("");
         int[] number = convertCard(card);
         int i;
-        String[] color = new String[5];
+        String[] suit = new String[5];
         for (i = 0; i < 5; i++) {
-            color[i] = strArray[i * 3 + 1];
+            suit[i] = strArray[i * 3 + 1];
         }
         HashSet<Integer> hashSetNumber = new HashSet<>();
         for (i = 0; i < 5; i++) {
@@ -272,7 +272,7 @@ public class Poker {
         }
         HashSet<String> hashSetType = new HashSet<>();
         for (i = 0; i < 5; i++) {
-            hashSetType.add(color[i]);
+            hashSetType.add(suit[i]);
         }
         if (hashSetNumber.size() == 5) {
             if (number[0] - number[4] == 4 && hashSetType.size() == 1) { //五个相邻的数字且花色一样——同花顺
