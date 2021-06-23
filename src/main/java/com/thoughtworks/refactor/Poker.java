@@ -96,7 +96,7 @@ public class Poker {
                         break;
                     }
                 }
-                if (winResult == "") {
+                if (winResult.equals("")) {
                     if (blackNoRepeat[0] < whiteNoRepeat[0]) {
                         String sig = intNumber(whiteNoRepeat[0]);
                         winResult = "white wins - high card:" + sig;
@@ -226,9 +226,8 @@ public class Poker {
         hashSet.remove(0);
         int[] result = new int[hashSet.size()];
         i = 0;
-        Iterator<Integer> iterator = hashSet.iterator();
-        while (iterator.hasNext()) {
-            result[i] = iterator.next();
+        for (Integer integer : hashSet) {
+            result[i] = integer;
             i++;
         }
         int[] reResult = new int[result.length];
@@ -268,9 +267,9 @@ public class Poker {
             hashSetType.add(color[i]);
         }
         if (hashSetNumber.size() == 5) {
-            if ((number[0] - number[4] == 4) && (hashSetType.size() == 1) && (hashSetNumber.size() == 5)) { //五个相邻的数字且花色一样——同花顺
+            if (number[0] - number[4] == 4 && hashSetType.size() == 1) { //五个相邻的数字且花色一样——同花顺
                 type = "StraightFlush";
-            } else if (number[0] - number[4] == 4 && (hashSetNumber.size() == 5)) { //五个相邻数字——顺子
+            } else if (number[0] - number[4] == 4) { //五个相邻数字——顺子
                 type = "Straight";
             } else if (hashSetType.size() == 1) { //同一花色——同花
                 type = "Flush";
@@ -319,7 +318,7 @@ public class Poker {
                     number[i] = 14;
                     break;
                 default:
-                    number[i] = Integer.valueOf(c);
+                    number[i] = Integer.parseInt(c);
                     break;
             }
         }
