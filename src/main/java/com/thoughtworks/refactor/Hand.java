@@ -7,6 +7,18 @@ public class Hand {
         this.hands = hands;
     }
 
+    static int[] getDistinctDescendingHandsNumbers(int[] blackDescendingHandsNumbers) {
+        return PokerUtil.getDistinctDescendingHandsNumbers(blackDescendingHandsNumbers);
+    }
+
+    static int[] getDescendingRepeatNumbers(int[] blackDescendingHandsNumbers) {
+        return PokerUtil.noOrRepeatNumber(blackDescendingHandsNumbers, 0);
+    }
+
+    static int[] getDescendingNoRepeatNumbers(int[] blackDescendingHandsNumbers) {
+        return PokerUtil.noOrRepeatNumber(blackDescendingHandsNumbers, 1);
+    }
+
     public String getHands() {
         return hands;
     }
@@ -17,5 +29,17 @@ public class Hand {
 
     Category getCategory() {
         return new Category(PokerUtil.judgeHandCategory(this));
+    }
+
+    int[] getDistinctDescendingHandsNumbers() {
+        return getDistinctDescendingHandsNumbers(getDescendingHandsNumbers());
+    }
+
+    int[] getDescendingRepeatNumbers() {
+        return getDescendingRepeatNumbers(getDescendingHandsNumbers());
+    }
+
+    int[] getDescendingNoRepeatNumbers() {
+        return getDescendingNoRepeatNumbers(getDescendingHandsNumbers());
     }
 }
