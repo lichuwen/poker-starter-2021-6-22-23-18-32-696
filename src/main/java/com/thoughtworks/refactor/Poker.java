@@ -28,18 +28,19 @@ public class Poker {
             } else if (blackHand.getCategory().getRanking() == 5) { //三条
                 winResult = compareThreeOfAKind(blackHand.getDescendingRepeatNumbers(), whiteHand.getDescendingRepeatNumbers());
             } else if (blackHand.getCategory().getRanking() == 6) { //两对
-                winResult = compareTwoPair(winResult, blackHand, whiteHand);
+                winResult = compareTwoPair(blackHand, whiteHand);
             } else if (blackHand.getCategory().getRanking() == 7) { //对子
-                winResult = compareOnePair(winResult, blackHand, whiteHand);
+                winResult = compareOnePair(blackHand, whiteHand);
             } else { //散牌
-                winResult = compareHighCard(winResult, 5, blackHand.getDescendingHandsNumbers(), whiteHand.getDescendingHandsNumbers());
+                winResult = compareHighCard(blackHand.getDescendingHandsNumbers(), whiteHand.getDescendingHandsNumbers());
             }
         }
         return winResult;
     }
 
-    private String compareHighCard(String winResult, int i2, int[] descendingHandsNumbers, int[] descendingHandsNumbers2) {
-        for (int i = 0; i < i2; i++) {
+    private String compareHighCard(int[] descendingHandsNumbers, int[] descendingHandsNumbers2) {
+        String winResult = null;
+        for (int i = 0; i < 5; i++) {
             if (descendingHandsNumbers[i] < descendingHandsNumbers2[i]) {
                 String sig = intNumber(descendingHandsNumbers2[i]);
                 winResult = "white wins - high card:" + sig;
@@ -55,7 +56,8 @@ public class Poker {
         return winResult;
     }
 
-    private String compareOnePair(String winResult, Hand blackHand, Hand whiteHand) {
+    private String compareOnePair(Hand blackHand, Hand whiteHand) {
+        String winResult = "";
         if (blackHand.getDescendingRepeatNumbers()[0] < whiteHand.getDescendingRepeatNumbers()[0]) {
             String sig = intNumber(whiteHand.getDescendingRepeatNumbers()[0]);
             winResult = "white wins - high card:" + sig;
@@ -80,7 +82,8 @@ public class Poker {
         return winResult;
     }
 
-    private String compareTwoPair(String winResult, Hand blackHand, Hand whiteHand) {
+    private String compareTwoPair( Hand blackHand, Hand whiteHand) {
+        String winResult = "";
         for (int i = 0; i < 2; i++) {
             if (blackHand.getDescendingRepeatNumbers()[i] < whiteHand.getDescendingRepeatNumbers()[i]) {
                 String sig = intNumber(whiteHand.getDescendingRepeatNumbers()[i]);
@@ -92,7 +95,7 @@ public class Poker {
                 break;
             }
         }
-        if (winResult == "") {
+        if (winResult.equals("")) {
             if (blackHand.getDescendingNoRepeatNumbers()[0] < whiteHand.getDescendingNoRepeatNumbers()[0]) {
                 String sig = intNumber(whiteHand.getDescendingNoRepeatNumbers()[0]);
                 winResult = "white wins - high card:" + sig;
