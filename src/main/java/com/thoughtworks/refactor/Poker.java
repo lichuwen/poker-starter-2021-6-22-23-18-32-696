@@ -249,10 +249,10 @@ public class Poker {
     }
 
     //判断是什么牌
-    private String judgeCardType(String str) {
+    private String judgeCardType(String card) {
         String type = "";
-        String[] strArray = str.split("");
-        int[] number = convertCard(str);
+        String[] strArray = card.split("");
+        int[] number = convertCard(card);
         int i;
         String[] color = new String[5];
         for (i = 0; i < 5; i++) {
