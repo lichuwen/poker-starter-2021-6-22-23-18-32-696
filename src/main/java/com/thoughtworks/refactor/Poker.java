@@ -17,10 +17,10 @@ public class Poker {
         int whiteRank = judgeHandRank(whiteHandCategory);
         int[] blackHandSort = sortHandNumber(blackHands);
         int[] whiteHandSort = sortHandNumber(whiteHands);
-        int[] blackHandRepeat = noOrRepeatHandNumber(blackHands, 0);
-        int[] whiteHandRepeat = noOrRepeatHandNumber(whiteHands, 0);
-        int[] blackHandNoRepeat = noOrRepeatHandNumber(blackHands, 1);
-        int[] whiteHandNoRepeat = noOrRepeatHandNumber(whiteHands, 1);
+        int[] blackHandRepeat = getHandRepeat(blackHands);
+        int[] whiteHandRepeat = getHandRepeat(whiteHands);
+        int[] blackHandNoRepeat = getHandNoRepeat(blackHands);
+        int[] whiteHandNoRepeat = getHandNoRepeat(whiteHands);
         if (blackRank < whiteRank) {
             winResult = "black wins - " + category[blackRank];
         } else if (blackRank > whiteRank) {
@@ -146,6 +146,14 @@ public class Poker {
             }
         }
         return winResult;
+    }
+
+    private int[] getHandNoRepeat(int[] blackHands) {
+        return noOrRepeatHandNumber(blackHands, 1);
+    }
+
+    private int[] getHandRepeat(int[] blackHands) {
+        return noOrRepeatHandNumber(blackHands, 0);
     }
 
     private String intNumber(int i) {
