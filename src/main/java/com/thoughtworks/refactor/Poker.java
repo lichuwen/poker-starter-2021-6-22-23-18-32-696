@@ -6,7 +6,7 @@ public class Poker {
 
     public static final String[] CARD_TYPES = {"StraightFlush", "FourOfAKind", "FullHouse", "Flush", "Straight", "ThreeOfAKind", "TwoPair", "OnePair", "HighCard"};
 
-    public String compairResult(String black, String white) {
+    public String compareResult(String black, String white) {
         String winResult = "";
         String blackType = judgeType(black);
         String whiteType = judgeType(white);
