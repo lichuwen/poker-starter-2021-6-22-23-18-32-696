@@ -46,14 +46,12 @@ public class PokerUtils {
     //判断是什么牌
     static String judgeHandCategory(String hand) {
         String type;
-        String[] splitHands = hand.split("");
-        int[] numbers = convertHandAndSortDesc(hand);
         int distinctNumberCount = getDistinctNumbers(hand).size();
         if (distinctNumberCount == 5) {
-            int suitCount = getSuits(splitHands).size();
-            if (numbers[0] - numbers[4] == 4 && suitCount == 1) { //五个相邻的数字且花色一样——同花顺
+            int suitCount = getSuits(hand).size();
+            if (convertHandAndSortDesc(hand)[0] - convertHandAndSortDesc(hand)[4] == 4 && suitCount == 1) { //五个相邻的数字且花色一样——同花顺
                 type = "StraightFlush";
-            } else if (numbers[0] - numbers[4] == 4) { //五个相邻数字——顺子
+            } else if (convertHandAndSortDesc(hand)[0] - convertHandAndSortDesc(hand)[4] == 4) { //五个相邻数字——顺子
                 type = "Straight";
             } else if (suitCount == 1) { //同一花色——同花
                 type = "Flush";
@@ -63,13 +61,13 @@ public class PokerUtils {
         } else if (distinctNumberCount == 4) { //一对相同，其余三个数字不同——对子
             type = "OnePair";
         } else if (distinctNumberCount == 3) {
-            if ((numbers[0] == numbers[1] && numbers[2] == numbers[3]) || (numbers[1] == numbers[2] && numbers[3] == numbers[4]) || (numbers[0] == numbers[1] && numbers[3] == numbers[4])) { //两对
+            if ((convertHandAndSortDesc(hand)[0] == convertHandAndSortDesc(hand)[1] && convertHandAndSortDesc(hand)[2] == convertHandAndSortDesc(hand)[3]) || (convertHandAndSortDesc(hand)[1] == convertHandAndSortDesc(hand)[2] && convertHandAndSortDesc(hand)[3] == convertHandAndSortDesc(hand)[4]) || (convertHandAndSortDesc(hand)[0] == convertHandAndSortDesc(hand)[1] && convertHandAndSortDesc(hand)[3] == convertHandAndSortDesc(hand)[4])) { //两对
                 type = "TwoPair";
             } else { //三个数字相同，另外两个数字不同——三条
                 type = "ThreeOfAKind";
             }
         } else {
-            if (numbers[0] != numbers[1] || numbers[3] != numbers[4]) { //三个数字相同，另外两个数字相同——葫芦
+            if (convertHandAndSortDesc(hand)[0] != convertHandAndSortDesc(hand)[1] || convertHandAndSortDesc(hand)[3] != convertHandAndSortDesc(hand)[4]) { //三个数字相同，另外两个数字相同——葫芦
                 type = "FourOfAKind";
             } else { //四个数字相同——铁支
                 type = "FullHouse";
@@ -82,8 +80,9 @@ public class PokerUtils {
         return getDistinctNumbers(convertHandAndSortDesc(hand));
     }
 
-    private static HashSet<String> getSuits(String[] splitHands) {
+    private static HashSet<String> getSuits(String hand) {
         int i;
+        String[] splitHands = hand.split("");
         String[] suit = new String[5];
         for (i = 0; i < 5; i++) {
             suit[i] = splitHands[i * 3 + 1];
