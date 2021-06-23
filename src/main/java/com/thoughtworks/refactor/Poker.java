@@ -15,8 +15,8 @@ public class Poker {
         int[] whiteCardNumber = convertCard(whiteCard);
         int blackCardIndex = judgeCardIndex(blackCardType);
         int whiteCardIndex = judgeCardIndex(whiteCardType);
-        int[] blackArraySort = arraySort(blackCardNumber);
-        int[] whiteArraySort = arraySort(whiteCardNumber);
+        int[] blackCardSort = sortCardNumber(blackCardNumber);
+        int[] whiteCardSort = sortCardNumber(whiteCardNumber);
         int[] blackRepeat = noOrRepeatNumber(blackCardNumber, 0);
         int[] whiteRepeat = noOrRepeatNumber(whiteCardNumber, 0);
         int[] blackNoRepeat = noOrRepeatNumber(blackCardNumber, 1);
@@ -37,19 +37,19 @@ public class Poker {
                     winResult = "tie";
                 }
             } else if (blackCardIndex == 1) { //铁支
-                if (blackArraySort[0] < whiteArraySort[0]) {
-                    String sig = intNumber(whiteArraySort[0]);
+                if (blackCardSort[0] < whiteCardSort[0]) {
+                    String sig = intNumber(whiteCardSort[0]);
                     winResult = "white wins - high card:" + sig;
                 } else {
-                    String sig = intNumber(blackArraySort[0]);
+                    String sig = intNumber(blackCardSort[0]);
                     winResult = "black wins - high card:" + sig;
                 }
             } else if (blackCardIndex == 2) { //葫芦
-                if (blackArraySort[0] < whiteArraySort[0]) {
-                    String sig = intNumber(whiteArraySort[0]);
+                if (blackCardSort[0] < whiteCardSort[0]) {
+                    String sig = intNumber(whiteCardSort[0]);
                     winResult = "white wins - high card:" + sig;
                 } else {
-                    String sig = intNumber(blackArraySort[0]);
+                    String sig = intNumber(blackCardSort[0]);
                     winResult = "black wins - high card:" + sig;
                 }
             } else if (blackCardIndex == 3) { //同花
@@ -153,7 +153,7 @@ public class Poker {
         return strNumber[i - 2];
     }
 
-    private int[] arraySort(int[] number) {
+    private int[] sortCardNumber(int[] number) {
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < number.length; i++) {
             if (map.get(number[i]) != null) {
