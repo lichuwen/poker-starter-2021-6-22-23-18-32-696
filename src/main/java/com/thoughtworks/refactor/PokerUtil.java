@@ -5,9 +5,9 @@ import java.util.HashSet;
 
 public class PokerUtil {
     //数字转化并将其从大到小排序
-    static int[] getDescendingHandsNumbers(String str) {
+    static int[] getDescendingHandsNumbers(Hand hand) {
         int[] number = new int[5];
-        String[] strArray = str.split("");
+        String[] strArray = hand.getHands().split("");
         int i;
         for (i = 0; i < 5; i++) {
             String c = strArray[i * 3];
@@ -68,7 +68,7 @@ public class PokerUtil {
     }
 
     private static boolean isFourOfAKind(String hands) {
-        final int[] descendingCardNumbers = getDescendingHandsNumbers(hands);
+        final int[] descendingCardNumbers = getDescendingHandsNumbers(new Hand(hands));
         return descendingCardNumbers[0] != descendingCardNumbers[1] || descendingCardNumbers[3] != descendingCardNumbers[4];
     }
 
@@ -78,7 +78,7 @@ public class PokerUtil {
 
     private static boolean isTwoPair(String hands) {
         final int distinctNumbersCount = countDistinctNumbers(hands);
-        final int[] descendingCardNumbers = getDescendingHandsNumbers(hands);
+        final int[] descendingCardNumbers = getDescendingHandsNumbers(new Hand(hands));
         return distinctNumbersCount == 3 && ((descendingCardNumbers[0] == descendingCardNumbers[1] && descendingCardNumbers[2] == descendingCardNumbers[3]) || (descendingCardNumbers[1] == descendingCardNumbers[2] && descendingCardNumbers[3] == descendingCardNumbers[4]) || (descendingCardNumbers[0] == descendingCardNumbers[1] && descendingCardNumbers[3] == descendingCardNumbers[4]) && distinctNumbersCount == 3);
     }
 
@@ -95,12 +95,12 @@ public class PokerUtil {
     }
 
     private static boolean isStraight(String hands) {
-        final int[] descendingCardNumbers = getDescendingHandsNumbers(hands);
+        final int[] descendingCardNumbers = getDescendingHandsNumbers(new Hand(hands));
         return descendingCardNumbers[0] - descendingCardNumbers[4] == 4 && (countDistinctNumbers(hands) == 5);
     }
 
     private static boolean isStraightFlush(String hands) {
-        final int[] descendingCardNumbers = getDescendingHandsNumbers(hands);
+        final int[] descendingCardNumbers = getDescendingHandsNumbers(new Hand(hands));
         return (descendingCardNumbers[0] - descendingCardNumbers[4] == 4) && (countSuits(hands) == 1) && (countDistinctNumbers(hands) == 5);
     }
 
@@ -112,7 +112,7 @@ public class PokerUtil {
         int i;
         HashSet<Integer> distinctNumbers = new HashSet<Integer>();
         for (i = 0; i < 5; i++) {
-            distinctNumbers.add(getDescendingHandsNumbers(hands)[i]);
+            distinctNumbers.add(getDescendingHandsNumbers(new Hand(hands))[i]);
         }
         return distinctNumbers.size();
     }

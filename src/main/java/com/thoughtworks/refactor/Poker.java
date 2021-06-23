@@ -9,19 +9,17 @@ public class Poker {
     public String compareResult(String blackHands, String whiteHands) {
         String winResult = "";
         Hand blackHand = new Hand(blackHands);
-        String blackHandsCategory = PokerUtil.judgeHandCategory(blackHand);
-        int[] blackDescendingHandsNumbers = PokerUtil.getDescendingHandsNumbers(blackHands);
-        Category blackCategory = new Category(blackHandsCategory);
-        int blackHandsCategoryRanking = judgeHandsCategoryRanking(blackCategory);
+        int[] blackDescendingHandsNumbers = blackHand.getDescendingHandsNumbers();
+        Category blackCategory = blackHand.getCategory();
+        int blackHandsCategoryRanking = blackCategory.getRanking();
         int[] blackDistinctDescendingHandsNumbers = getDistinctDescendingHandsNumbers(blackDescendingHandsNumbers);
         int[] blackRepeatNumbers = getDescendingRepeatNumbers(blackDescendingHandsNumbers);
         int[] blackNoRepeatNumbers = getDescendingNoRepeatNumbers(blackDescendingHandsNumbers);
 
         Hand whiteHand = new Hand(whiteHands);
-        String whiteHandsCategory = PokerUtil.judgeHandCategory(whiteHand);
-        int[] whiteDescendingHandsNumbers = PokerUtil.getDescendingHandsNumbers(whiteHands);
-        Category whiteCategory = new Category(whiteHandsCategory);
-        int whiteHandsCategoryRanking = judgeHandsCategoryRanking(whiteCategory);
+        int[] whiteDescendingHandsNumbers = whiteHand.getDescendingHandsNumbers();
+        Category whiteCategory = whiteHand.getCategory();
+        int whiteHandsCategoryRanking = whiteCategory.getRanking();
         int[] whiteDistinctDescendingHandsNumbers = getDistinctDescendingHandsNumbers(whiteDescendingHandsNumbers);
         int[] whiteRepeatNumbers = getDescendingRepeatNumbers(whiteDescendingHandsNumbers);
         int[] whiteNoRepeatNumbers = getDescendingNoRepeatNumbers(whiteDescendingHandsNumbers);
@@ -248,17 +246,6 @@ public class Poker {
             reResult[i] = result[result.length - i - 1];
         }
         return reResult;
-    }
-
-    private int judgeHandsCategoryRanking(Category category) {
-        int index = -1;
-        String[] type = {"StraightFlush", "FourOfAKind", "FullHouse", "Flush", "Straight", "ThreeOfAKind", "TwoPair", "OnePair", "HighCard"};
-        for (int i = 0; i < 9; i++) {
-            if (type[i].equals(category.getCategory())) {
-                index = i;
-            }
-        }
-        return index;
     }
 
 }
