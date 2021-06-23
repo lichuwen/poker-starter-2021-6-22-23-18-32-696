@@ -11,8 +11,8 @@ public class Poker {
         String blackHandCategory = judgeHandCategory(blackHand);
         String whiteHandCategory = judgeHandCategory(whiteHand);
         String[] category = CATEGORY;
-        int[] blackHands = convertCard(blackHand);
-        int[] whiteHands = convertCard(whiteHand);
+        int[] blackHands = convertHandAndSortDesc(blackHand);
+        int[] whiteHands = convertHandAndSortDesc(whiteHand);
         int blackRanking = judgeHandRanking(blackHandCategory);
         int whiteRanking = judgeHandRanking(whiteHandCategory);
         int[] blackHandSort = sortHandNumber(blackHands);
@@ -257,10 +257,10 @@ public class Poker {
     }
 
     //判断是什么牌
-    private String judgeHandCategory(String card) {
+    private String judgeHandCategory(String hand) {
         String type;
-        String[] strArray = card.split("");
-        int[] number = convertCard(card);
+        String[] strArray = hand.split("");
+        int[] number = convertHandAndSortDesc(hand);
         int i;
         String[] suit = new String[5];
         for (i = 0; i < 5; i++) {
@@ -303,9 +303,9 @@ public class Poker {
     }
 
     //数字转化并将其从大到小排序
-    private int[] convertCard(String card) {
+    private int[] convertHandAndSortDesc(String hand) {
         int[] number = new int[5];
-        String[] strArray = card.split("");
+        String[] strArray = hand.split("");
         int i;
         for (i = 0; i < 5; i++) {
             String c = strArray[i * 3];
