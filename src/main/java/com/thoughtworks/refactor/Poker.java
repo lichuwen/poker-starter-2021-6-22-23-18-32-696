@@ -154,7 +154,7 @@ public class Poker {
     }
 
     private int[] arraySort(int[] number) {
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < number.length; i++) {
             if (map.get(number[i]) != null) {
                 map.put(number[i], map.get(number[i]) + 1);
@@ -162,7 +162,7 @@ public class Poker {
                 map.put(number[i], 1);
             }
         }
-        List<Map.Entry<Integer, Integer>> list = new ArrayList<Map.Entry<Integer, Integer>>();
+        List<Map.Entry<Integer, Integer>> list = new ArrayList<>();
         list.addAll(map.entrySet());
         Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
             public int compare(Map.Entry<Integer, Integer> arg0, Map.Entry<Integer, Integer> arg1) {
@@ -180,7 +180,7 @@ public class Poker {
 
     //先获得数组中每个元素出现的次数，然后再进行计算出现次数大于1的和出现次数等于1的
     private int[] noOrRepeatNumber(int[] number, int flag) {
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < number.length; i++) {
             if (map.get(number[i]) != null) {
                 map.put(number[i], map.get(number[i]) + 1);
@@ -250,7 +250,7 @@ public class Poker {
 
     //判断是什么牌
     private String judgeCardType(String card) {
-        String type = "";
+        String type;
         String[] strArray = card.split("");
         int[] number = convertCard(card);
         int i;
