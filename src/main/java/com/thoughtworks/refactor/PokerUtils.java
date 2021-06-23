@@ -47,12 +47,11 @@ public class PokerUtils {
     static String judgeHandCategory(String hand) {
         String type;
         if (getDistinctNumbers(hand).size() == 5) {
-            int suitCount = getSuits(hand).size();
-            if (convertHandAndSortDesc(hand)[0] - convertHandAndSortDesc(hand)[4] == 4 && suitCount == 1) { //五个相邻的数字且花色一样——同花顺
+            if (convertHandAndSortDesc(hand)[0] - convertHandAndSortDesc(hand)[4] == 4 && getSuits(hand).size() == 1) { //五个相邻的数字且花色一样——同花顺
                 type = "StraightFlush";
             } else if (convertHandAndSortDesc(hand)[0] - convertHandAndSortDesc(hand)[4] == 4) { //五个相邻数字——顺子
                 type = "Straight";
-            } else if (suitCount == 1) { //同一花色——同花
+            } else if (getSuits(hand).size() == 1) { //同一花色——同花
                 type = "Flush";
             } else { //五个不相邻的数字——散牌
                 type = "HighCard";
