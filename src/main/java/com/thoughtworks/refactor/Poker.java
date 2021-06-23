@@ -6,8 +6,8 @@ public class Poker {
 
     public String compareResult(String blackHand, String whiteHand) {
         String winResult = "";
-        String blackHandCategory = judgeHandCategory(blackHand);
-        String whiteHandCategory = judgeHandCategory(whiteHand);
+        String blackHandCategory = PokerUtils.judgeHandCategory(blackHand);
+        String whiteHandCategory = PokerUtils.judgeHandCategory(whiteHand);
         String[] category = PokerUtils.CATEGORY;
         int[] blackHands = PokerUtils.convertHandAndSortDesc(blackHand);
         int[] whiteHands = PokerUtils.convertHandAndSortDesc(whiteHand);
@@ -252,52 +252,6 @@ public class Poker {
             }
         }
         return index;
-    }
-
-    //判断是什么牌
-    private static String judgeHandCategory(String hand) {
-        String type;
-        String[] splitHands = hand.split("");
-        int[] distinctNumbers = PokerUtils.convertHandAndSortDesc(hand);
-        int i;
-        String[] suit = new String[5];
-        for (i = 0; i < 5; i++) {
-            suit[i] = splitHands[i * 3 + 1];
-        }
-        HashSet<Integer> suits = new HashSet<>();
-        for (i = 0; i < 5; i++) {
-            suits.add(distinctNumbers[i]);
-        }
-        HashSet<String> suitTypes = new HashSet<>();
-        for (i = 0; i < 5; i++) {
-            suitTypes.add(suit[i]);
-        }
-        if (suits.size() == 5) {
-            if (distinctNumbers[0] - distinctNumbers[4] == 4 && suitTypes.size() == 1) { //五个相邻的数字且花色一样——同花顺
-                type = "StraightFlush";
-            } else if (distinctNumbers[0] - distinctNumbers[4] == 4) { //五个相邻数字——顺子
-                type = "Straight";
-            } else if (suitTypes.size() == 1) { //同一花色——同花
-                type = "Flush";
-            } else { //五个不相邻的数字——散牌
-                type = "HighCard";
-            }
-        } else if (suits.size() == 4) { //一对相同，其余三个数字不同——对子
-            type = "OnePair";
-        } else if (suits.size() == 3) {
-            if ((distinctNumbers[0] == distinctNumbers[1] && distinctNumbers[2] == distinctNumbers[3]) || (distinctNumbers[1] == distinctNumbers[2] && distinctNumbers[3] == distinctNumbers[4]) || (distinctNumbers[0] == distinctNumbers[1] && distinctNumbers[3] == distinctNumbers[4])) { //两对
-                type = "TwoPair";
-            } else { //三个数字相同，另外两个数字不同——三条
-                type = "ThreeOfAKind";
-            }
-        } else {
-            if (distinctNumbers[0] != distinctNumbers[1] || distinctNumbers[3] != distinctNumbers[4]) { //三个数字相同，另外两个数字相同——葫芦
-                type = "FourOfAKind";
-            } else { //四个数字相同——铁支
-                type = "FullHouse";
-            }
-        }
-        return type;
     }
 
 }
