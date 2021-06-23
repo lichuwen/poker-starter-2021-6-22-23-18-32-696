@@ -4,15 +4,13 @@ import java.util.*;
 
 public class Poker {
 
-    public static final String[] CATEGORY = {"StraightFlush", "FourOfAKind", "FullHouse", "Flush", "Straight", "ThreeOfAKind", "TwoPair", "OnePair", "HighCard"};
-
     public String compareResult(String blackHand, String whiteHand) {
         String winResult = "";
         String blackHandCategory = judgeHandCategory(blackHand);
         String whiteHandCategory = judgeHandCategory(whiteHand);
-        String[] category = CATEGORY;
-        int[] blackHands = convertHandAndSortDesc(blackHand);
-        int[] whiteHands = convertHandAndSortDesc(whiteHand);
+        String[] category = PokerUtils.CATEGORY;
+        int[] blackHands = PokerUtils.convertHandAndSortDesc(blackHand);
+        int[] whiteHands = PokerUtils.convertHandAndSortDesc(whiteHand);
         int blackRanking = judgeHandRanking(blackHandCategory);
         int whiteRanking = judgeHandRanking(whiteHandCategory);
         int[] blackHandSort = sortHandNumber(blackHands);
@@ -257,10 +255,10 @@ public class Poker {
     }
 
     //判断是什么牌
-    private String judgeHandCategory(String hand) {
+    private static String judgeHandCategory(String hand) {
         String type;
         String[] splitHands = hand.split("");
-        int[] distinctNumbers = convertHandAndSortDesc(hand);
+        int[] distinctNumbers = PokerUtils.convertHandAndSortDesc(hand);
         int i;
         String[] suit = new String[5];
         for (i = 0; i < 5; i++) {
@@ -302,40 +300,4 @@ public class Poker {
         return type;
     }
 
-    //数字转化并将其从大到小排序
-    private int[] convertHandAndSortDesc(String hand) {
-        int[] number = new int[5];
-        String[] strArray = hand.split("");
-        int i;
-        for (i = 0; i < 5; i++) {
-            String c = strArray[i * 3];
-            switch (c) {
-                case "T":
-                    number[i] = 10;
-                    break;
-                case "J":
-                    number[i] = 11;
-                    break;
-                case "Q":
-                    number[i] = 12;
-                    break;
-                case "K":
-                    number[i] = 13;
-                    break;
-                case "A":
-                    number[i] = 14;
-                    break;
-                default:
-                    number[i] = Integer.parseInt(c);
-                    break;
-            }
-        }
-
-        Arrays.sort(number);
-        int[] renumber = new int[number.length];
-        for (i = 0; i < number.length; i++) {
-            renumber[i] = number[number.length - i - 1];
-        }
-        return renumber;
-    }
 }
