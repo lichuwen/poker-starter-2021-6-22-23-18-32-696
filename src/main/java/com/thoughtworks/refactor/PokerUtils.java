@@ -43,7 +43,7 @@ public class PokerUtils {
         return renumber;
     }
 
-    //判断是什么牌
+    //判断是什么牌.
     static String judgeHandCategory(String hand) {
         String type;
         if (convertHandAndSortDesc(hand)[0] - convertHandAndSortDesc(hand)[4] == 4 && getSuits(hand).size() == 1 && getDistinctNumbers(hand).size() == 5) { //五个相邻的数字且花色一样——同花顺
