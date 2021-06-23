@@ -6,15 +6,15 @@ public class Poker {
 
     public static final String[] CARD_TYPES = {"StraightFlush", "FourOfAKind", "FullHouse", "Flush", "Straight", "ThreeOfAKind", "TwoPair", "OnePair", "HighCard"};
 
-    public String compareResult(String black, String white) {
+    public String compareResult(String blackCard, String whiteCard) {
         String winResult = "";
-        String blackType = judgeType(black);
-        String whiteType = judgeType(white);
-        String[] type = CARD_TYPES;
-        int[] blackNumber = strNumber(black);
-        int[] whiteNumber = strNumber(white);
-        int blackIndex = judgeIndex(blackType);
-        int whiteIndex = judgeIndex(whiteType);
+        String blackCardType = judgeCardType(blackCard);
+        String whiteCardType = judgeCardType(whiteCard);
+        String[] cardTypes = CARD_TYPES;
+        int[] blackNumber = strNumber(blackCard);
+        int[] whiteNumber = strNumber(whiteCard);
+        int blackIndex = judgeIndex(blackCardType);
+        int whiteIndex = judgeIndex(whiteCardType);
         int[] blackArraySort = arraySort(blackNumber);
         int[] whiteArraySort = arraySort(whiteNumber);
         int[] blackRepeat = noOrRepeatNumber(blackNumber, 0);
@@ -22,9 +22,9 @@ public class Poker {
         int[] blackNoRepeat = noOrRepeatNumber(blackNumber, 1);
         int[] whiteNoRepeat = noOrRepeatNumber(whiteNumber, 1);
         if (blackIndex < whiteIndex) {
-            winResult = "black wins - " + type[blackIndex];
+            winResult = "black wins - " + cardTypes[blackIndex];
         } else if (blackIndex > whiteIndex) {
-            winResult = "white wins - " + type[whiteIndex];
+            winResult = "white wins - " + cardTypes[whiteIndex];
         } else {
             if (blackIndex == 0) { //同花顺
                 if (blackNumber[0] < whiteNumber[0]) {
@@ -250,7 +250,7 @@ public class Poker {
     }
 
     //判断是什么牌
-    private String judgeType(String str) {
+    private String judgeCardType(String str) {
         String type = "";
         String[] strArray = str.split("");
         int[] number = strNumber(str);
