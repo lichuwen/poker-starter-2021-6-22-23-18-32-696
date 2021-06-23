@@ -46,16 +46,14 @@ public class PokerUtils {
     //判断是什么牌
     static String judgeHandCategory(String hand) {
         String type;
-        if (getDistinctNumbers(hand).size() == 5) {
-            if (convertHandAndSortDesc(hand)[0] - convertHandAndSortDesc(hand)[4] == 4 && getSuits(hand).size() == 1) { //五个相邻的数字且花色一样——同花顺
-                type = "StraightFlush";
-            } else if (convertHandAndSortDesc(hand)[0] - convertHandAndSortDesc(hand)[4] == 4) { //五个相邻数字——顺子
-                type = "Straight";
-            } else if (getSuits(hand).size() == 1) { //同一花色——同花
-                type = "Flush";
-            } else { //五个不相邻的数字——散牌
-                type = "HighCard";
-            }
+        if (convertHandAndSortDesc(hand)[0] - convertHandAndSortDesc(hand)[4] == 4 && getSuits(hand).size() == 1 && getDistinctNumbers(hand).size() == 5) { //五个相邻的数字且花色一样——同花顺
+            type = "StraightFlush";
+        } else if (convertHandAndSortDesc(hand)[0] - convertHandAndSortDesc(hand)[4] == 4 && getDistinctNumbers(hand).size() == 5) { //五个相邻数字——顺子
+            type = "Straight";
+        } else if (getSuits(hand).size() == 1 && getDistinctNumbers(hand).size() == 5) { //同一花色——同花
+            type = "Flush";
+        } else if(getDistinctNumbers(hand).size() == 5){ //五个不相邻的数字——散牌
+            type = "HighCard";
         } else if (getDistinctNumbers(hand).size() == 4) { //一对相同，其余三个数字不同——对子
             type = "OnePair";
         } else if (getDistinctNumbers(hand).size() == 3) {
