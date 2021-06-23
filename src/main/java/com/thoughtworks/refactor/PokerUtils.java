@@ -48,21 +48,21 @@ public class PokerUtils {
         String type;
         String[] splitHands = hand.split("");
         int[] numbers = convertHandAndSortDesc(hand);
-        HashSet<String> suitTypes = getSuits(splitHands);
-        HashSet<Integer> distinctNumbers = getDistinctNumbers(numbers);
-        if (distinctNumbers.size() == 5) {
-            if (numbers[0] - numbers[4] == 4 && suitTypes.size() == 1) { //五个相邻的数字且花色一样——同花顺
+        int distinctNumberCount = getDistinctNumbers(hand).size();
+        if (distinctNumberCount == 5) {
+            int suitCount = getSuits(splitHands).size();
+            if (numbers[0] - numbers[4] == 4 && suitCount == 1) { //五个相邻的数字且花色一样——同花顺
                 type = "StraightFlush";
             } else if (numbers[0] - numbers[4] == 4) { //五个相邻数字——顺子
                 type = "Straight";
-            } else if (suitTypes.size() == 1) { //同一花色——同花
+            } else if (suitCount == 1) { //同一花色——同花
                 type = "Flush";
             } else { //五个不相邻的数字——散牌
                 type = "HighCard";
             }
-        } else if (distinctNumbers.size() == 4) { //一对相同，其余三个数字不同——对子
+        } else if (distinctNumberCount == 4) { //一对相同，其余三个数字不同——对子
             type = "OnePair";
-        } else if (distinctNumbers.size() == 3) {
+        } else if (distinctNumberCount == 3) {
             if ((numbers[0] == numbers[1] && numbers[2] == numbers[3]) || (numbers[1] == numbers[2] && numbers[3] == numbers[4]) || (numbers[0] == numbers[1] && numbers[3] == numbers[4])) { //两对
                 type = "TwoPair";
             } else { //三个数字相同，另外两个数字不同——三条
@@ -78,7 +78,10 @@ public class PokerUtils {
         return type;
     }
 
-    @org.jetbrains.annotations.NotNull
+    private static HashSet<Integer> getDistinctNumbers(String hand) {
+        return getDistinctNumbers(convertHandAndSortDesc(hand));
+    }
+
     private static HashSet<String> getSuits(String[] splitHands) {
         int i;
         String[] suit = new String[5];
@@ -92,7 +95,6 @@ public class PokerUtils {
         return suitTypes;
     }
 
-    @org.jetbrains.annotations.NotNull
     private static HashSet<Integer> getDistinctNumbers(int[] numbers) {
         int i;
         HashSet<Integer> distinctNumbers = new HashSet<>();
