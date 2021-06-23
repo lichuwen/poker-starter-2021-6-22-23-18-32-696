@@ -48,15 +48,7 @@ public class PokerUtils {
         String type;
         String[] splitHands = hand.split("");
         int[] numbers = convertHandAndSortDesc(hand);
-        int i;
-        String[] suit = new String[5];
-        for (i = 0; i < 5; i++) {
-            suit[i] = splitHands[i * 3 + 1];
-        }
-        HashSet<String> suitTypes = new HashSet<>();
-        for (i = 0; i < 5; i++) {
-            suitTypes.add(suit[i]);
-        }
+        HashSet<String> suitTypes = getSuits(splitHands);
         HashSet<Integer> distinctNumbers = getDistinctNumbers(numbers);
         if (distinctNumbers.size() == 5) {
             if (numbers[0] - numbers[4] == 4 && suitTypes.size() == 1) { //五个相邻的数字且花色一样——同花顺
@@ -84,6 +76,20 @@ public class PokerUtils {
             }
         }
         return type;
+    }
+
+    @org.jetbrains.annotations.NotNull
+    private static HashSet<String> getSuits(String[] splitHands) {
+        int i;
+        String[] suit = new String[5];
+        for (i = 0; i < 5; i++) {
+            suit[i] = splitHands[i * 3 + 1];
+        }
+        HashSet<String> suitTypes = new HashSet<>();
+        for (i = 0; i < 5; i++) {
+            suitTypes.add(suit[i]);
+        }
+        return suitTypes;
     }
 
     @org.jetbrains.annotations.NotNull
