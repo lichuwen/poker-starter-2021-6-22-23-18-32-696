@@ -4,13 +4,13 @@ import java.util.*;
 
 public class Poker {
 
-    public static final String[] CARD_TYPES = {"StraightFlush", "FourOfAKind", "FullHouse", "Flush", "Straight", "ThreeOfAKind", "TwoPair", "OnePair", "HighCard"};
+    public static final String[] CATEGORY = {"StraightFlush", "FourOfAKind", "FullHouse", "Flush", "Straight", "ThreeOfAKind", "TwoPair", "OnePair", "HighCard"};
 
     public String compareResult(String blackCard, String whiteCard) {
         String winResult = "";
         String blackCardType = judgeCardType(blackCard);
         String whiteCardType = judgeCardType(whiteCard);
-        String[] cardTypes = CARD_TYPES;
+        String[] category = CATEGORY;
         int[] blackCardNumber = convertCard(blackCard);
         int[] whiteCardNumber = convertCard(whiteCard);
         int blackCardIndex = judgeCardIndex(blackCardType);
@@ -22,9 +22,9 @@ public class Poker {
         int[] blackCardNoRepeat = noOrRepeatCardNumber(blackCardNumber, 1);
         int[] whiteCardNoRepeat = noOrRepeatCardNumber(whiteCardNumber, 1);
         if (blackCardIndex < whiteCardIndex) {
-            winResult = "black wins - " + cardTypes[blackCardIndex];
+            winResult = "black wins - " + category[blackCardIndex];
         } else if (blackCardIndex > whiteCardIndex) {
-            winResult = "white wins - " + cardTypes[whiteCardIndex];
+            winResult = "white wins - " + category[whiteCardIndex];
         } else {
             if (blackCardIndex == 0) { //同花顺
                 if (blackCardNumber[0] < whiteCardNumber[0]) {
