@@ -11,7 +11,7 @@ public class Poker {
         Hand blackHand = new Hand(blackHands);
         String blackHandsCategory = PokerUtil.judgeHandCategory(blackHand);
         int[] blackDescendingHandsNumbers = PokerUtil.getDescendingHandsNumbers(blackHands);
-        int blackHandsCategoryRanking = judgeHandsCategoryRanking(blackHandsCategory);
+        int blackHandsCategoryRanking = judgeHandsCategoryRanking(new Category(blackHandsCategory));
         int[] blackDistinctDescendingHandsNumbers = getDistinctDescendingHandsNumbers(blackDescendingHandsNumbers);
         int[] blackRepeatNumbers = getDescendingRepeatNumbers(blackDescendingHandsNumbers);
         int[] blackNoRepeatNumbers = getDescendingNoRepeatNumbers(blackDescendingHandsNumbers);
@@ -19,7 +19,7 @@ public class Poker {
         Hand whiteHand = new Hand(whiteHands);
         String whiteHandsCategory = PokerUtil.judgeHandCategory(whiteHand);
         int[] whiteDescendingHandsNumbers = PokerUtil.getDescendingHandsNumbers(whiteHands);
-        int whiteHandsCategoryRanking = judgeHandsCategoryRanking(whiteHandsCategory);
+        int whiteHandsCategoryRanking = judgeHandsCategoryRanking(new Category(whiteHandsCategory));
         int[] whiteDistinctDescendingHandsNumbers = getDistinctDescendingHandsNumbers(whiteDescendingHandsNumbers);
         int[] whiteRepeatNumbers = getDescendingRepeatNumbers(whiteDescendingHandsNumbers);
         int[] whiteNoRepeatNumbers = getDescendingNoRepeatNumbers(whiteDescendingHandsNumbers);
@@ -248,11 +248,11 @@ public class Poker {
         return reResult;
     }
 
-    private int judgeHandsCategoryRanking(String category) {
+    private int judgeHandsCategoryRanking(Category category) {
         int index = -1;
         String[] type = {"StraightFlush", "FourOfAKind", "FullHouse", "Flush", "Straight", "ThreeOfAKind", "TwoPair", "OnePair", "HighCard"};
         for (int i = 0; i < 9; i++) {
-            if (type[i].equals(category)) {
+            if (type[i].equals(category.getCategory())) {
                 index = i;
             }
         }
