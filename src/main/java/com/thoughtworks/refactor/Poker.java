@@ -213,7 +213,7 @@ public class Poker {
                 }
             }
         }
-        HashSet<Integer> hashSet = new HashSet<Integer>();
+        HashSet<Integer> hashSet = new HashSet<>();
         if (flag == 0) {
             for (i = 0; i < repeatnumber.length; i++) {
                 hashSet.add(repeatnumber[i]);
@@ -258,11 +258,11 @@ public class Poker {
         for (i = 0; i < 5; i++) {
             color[i] = strArray[i * 3 + 1];
         }
-        HashSet<Integer> hashSetNumber = new HashSet<Integer>();
+        HashSet<Integer> hashSetNumber = new HashSet<>();
         for (i = 0; i < 5; i++) {
             hashSetNumber.add(number[i]);
         }
-        HashSet<String> hashSetType = new HashSet<String>();
+        HashSet<String> hashSetType = new HashSet<>();
         for (i = 0; i < 5; i++) {
             hashSetType.add(color[i]);
         }
